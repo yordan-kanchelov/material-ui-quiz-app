@@ -3,6 +3,7 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
+import Answer from "./components/Answer";
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";
@@ -43,6 +44,8 @@ class App extends React.Component {
         console.log("submit");
     };
 
+    _getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
+    _getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
     _shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
     _shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
     _shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
@@ -53,47 +56,49 @@ class App extends React.Component {
         return (
             <div className="App">
                 <MuiThemeProvider theme={theme}>
-                        <Paper className={classes.root} elevation={1}>
-                            <img src={logo} className={classes.logo} alt="logo" />
-                            <hr width={"100%"}></hr>
-                            
-                            <QuestionParagraph
-                                question={"Paper can be used to build surface or other elements for your application."}
-                            />
+                    <Paper className={classes.paper} elevation={2}>
+                        <img src={logo} className={classes.logo} alt="logo" />
+                        <hr width={"100%"} />
 
-                            {this._shouldShowSubmit() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.button}
-                                    onClick={this.onSubmitClick}
-                                    color="primary"
-                                >
-                                    Submit
-                                </Button>
-                            ) : null}
+                        <QuestionParagraph question={this._getCurrentQuestion()} />
 
-                            {this._shouldShowNext() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.button}
-                                    onClick={this.onNextClick}
-                                    color="primary"
-                                >
-                                    Next
-                                </Button>
-                            ) : null}
+                        {this._getCurrentAnswers().map((currentAnswer, index) => {
+                            return <Answer answer={currentAnswer} key={index} />;
+                        })}
 
-                            {this._shouldShowPrev() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.button}
-                                    onClick={this.onPrevClick}
-                                    color="primary"
-                                >
-                                    Prev
-                                </Button>
-                            ) : null}
-                        </Paper>
+                        {this._shouldShowSubmit() ? (
+                            <Button
+                                variant="contained"
+                                className={classes.button}
+                                onClick={this.onSubmitClick}
+                                color="primary"
+                            >
+                                Submit
+                            </Button>
+                        ) : null}
+
+                        {this._shouldShowNext() ? (
+                            <Button
+                                variant="contained"
+                                className={classes.button}
+                                onClick={this.onNextClick}
+                                color="primary"
+                            >
+                                Next
+                            </Button>
+                        ) : null}
+
+                        {this._shouldShowPrev() ? (
+                            <Button
+                                variant="contained"
+                                className={classes.button}
+                                onClick={this.onPrevClick}
+                                color="primary"
+                            >
+                                Prev
+                            </Button>
+                        ) : null}
+                    </Paper>
                 </MuiThemeProvider>
             </div>
         );
