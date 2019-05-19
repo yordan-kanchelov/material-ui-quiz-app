@@ -1,22 +1,103 @@
 import React from "react";
+
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
+
 import logo from "../assets/logo.svg";
-import "../styles/App.css";
+import theme from "./styles/theme";
+import styles from "./styles/style";
+import getQuestions from "./models/questions";
 
-import Question from "./components/Question";
-
-const questions = [];
-
-function App() {
+const QuestionParagraph = ({ question }) => {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-            </header>
-            <main> 
-                <Question questions={questions}/>
-            </main>
-        </div>
+        <Typography variant="h5" component="h1">
+            {question}
+        </Typography>
     );
+};
+
+class App extends React.Component {
+    state = {
+        questions: getQuestions(),
+        clientAnswerIndexes: [],
+        currentQuestionIndex: 0
+    };
+
+    onNextClick = e => {
+        const currentState = this.state;
+        this.setState({
+            currentQuestionIndex: ++currentState.currentQuestionIndex
+        });
+    };
+
+    onPrevClick = e => {
+        const currentState = this.state;
+        this.setState({
+            currentQuestionIndex: --currentState.currentQuestionIndex
+        });
+    };
+
+    onSubmitClick = e => {
+        console.log("submit");
+    };
+
+    _shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
+    _shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
+    _shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
+
+    render() {
+        const { classes } = this.props;
+
+        return (
+            <div className="App">
+                <MuiThemeProvider theme={theme}>
+                        <Paper className={classes.root} elevation={1}>
+                            <img src={logo} className={classes.logo} alt="logo" />
+                            <hr width={"100%"}></hr>
+                            
+                            <QuestionParagraph
+                                question={"Paper can be used to build surface or other elements for your application."}
+                            />
+
+                            {this._shouldShowSubmit() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.button}
+                                    onClick={this.onSubmitClick}
+                                    color="primary"
+                                >
+                                    Submit
+                                </Button>
+                            ) : null}
+
+                            {this._shouldShowNext() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.button}
+                                    onClick={this.onNextClick}
+                                    color="primary"
+                                >
+                                    Next
+                                </Button>
+                            ) : null}
+
+                            {this._shouldShowPrev() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.button}
+                                    onClick={this.onPrevClick}
+                                    color="primary"
+                                >
+                                    Prev
+                                </Button>
+                            ) : null}
+                        </Paper>
+                </MuiThemeProvider>
+            </div>
+        );
+    }
 }
 
-export default App;
+export default withStyles(styles)(App);
