@@ -13,9 +13,9 @@ import getQuestions from "./models/questions";
 
 const QuestionParagraph = ({ question }) => {
     return (
-        <Typography variant="h5" component="h1">
-            {question}
-        </Typography>
+        <h2>
+            <pre>{question}</pre>
+        </h2>
     );
 };
 
@@ -25,6 +25,21 @@ class App extends React.Component {
         clientAnswerIndexes: [],
         currentQuestionIndex: 0
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        this._updateButtonsPos()
+    }
+
+    componentDidMount() {
+        window.onorientationchange = () => this._updateButtonsPos();
+        window.onresize =() => this._updateButtonsPos();
+
+        this._updateButtonsPos()       
+        
+        setTimeout(() => {
+            this._updateButtonsPos()        
+        },0)
+    }
 
     onNextClick = e => {
         const currentState = this.state;
@@ -44,6 +59,20 @@ class App extends React.Component {
         console.log("submit");
     };
 
+    _updateButtonsPos =() => {
+        let buttons = Array.from(document.getElementById("buttonsContainer").children);
+        let mainContainer = document.querySelector("#root > div > div");
+
+        buttons.forEach(button => {
+            button.style.bottom = "0px";
+        });
+
+        const bottomPossition = mainContainer.clientHeight - mainContainer.scrollHeight;
+
+        buttons.forEach(button => {
+            button.style.bottom = bottomPossition + "px";
+        });
+    }
     _getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     _getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
     _shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
@@ -62,42 +91,46 @@ class App extends React.Component {
 
                         <QuestionParagraph question={this._getCurrentQuestion()} />
 
-                        {this._getCurrentAnswers().map((currentAnswer, index) => {
-                            return <Answer answer={currentAnswer} key={index} />;
-                        })}
+                        <div className={classes.answerContainer}>
+                            {this._getCurrentAnswers().map((currentAnswer, index) => {
+                                return <Answer answer={currentAnswer} key={index} />;
+                            })}
+                        </div>
 
-                        {this._shouldShowSubmit() ? (
-                            <Button
-                                variant="contained"
-                                className={classes.button}
-                                onClick={this.onSubmitClick}
-                                color="primary"
-                            >
-                                Submit
-                            </Button>
-                        ) : null}
+                        <div id="buttonsContainer">
+                            {this._shouldShowSubmit() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.btnSubmit}
+                                    onClick={this.onSubmitClick}
+                                    color="primary"
+                                >
+                                    Submit
+                                </Button>
+                            ) : null}
 
-                        {this._shouldShowNext() ? (
-                            <Button
-                                variant="contained"
-                                className={classes.button}
-                                onClick={this.onNextClick}
-                                color="primary"
-                            >
-                                Next
-                            </Button>
-                        ) : null}
+                            {this._shouldShowNext() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.btnNext}
+                                    onClick={this.onNextClick}
+                                    color="primary"
+                                >
+                                    Next
+                                </Button>
+                            ) : null}
 
-                        {this._shouldShowPrev() ? (
-                            <Button
-                                variant="contained"
-                                className={classes.button}
-                                onClick={this.onPrevClick}
-                                color="primary"
-                            >
-                                Prev
-                            </Button>
-                        ) : null}
+                            {this._shouldShowPrev() ? (
+                                <Button
+                                    variant="contained"
+                                    className={classes.btnPrev}
+                                    onClick={this.onPrevClick}
+                                    color="primary"
+                                >
+                                    Prev
+                                </Button>
+                            ) : null}
+                        </div>
                     </Paper>
                 </MuiThemeProvider>
             </div>

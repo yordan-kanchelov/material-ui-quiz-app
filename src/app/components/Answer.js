@@ -20,7 +20,7 @@ class Answer extends React.Component {
             <MuiThemeProvider theme={theme}>
                 <div className={classes.answer}>
                     <Radio checked={this.state.selected} />
-                    <Typography className={classes.answerTypography} component="p">
+                    <Typography className={classes.answerTypography} component="pre">
                         {this.props.answer}
                     </Typography>
                 </div>
