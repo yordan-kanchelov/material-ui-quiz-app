@@ -1,7 +1,6 @@
 const questions = () => [
     {
-        question: `
-1. Given the following,
+        question: `1. Given the following,
 
 1.	class X { void do1() { } }
 2.	class Y extends X { void do2() { } }

@@ -1,9 +1,9 @@
 import React from "react";
 
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Answer from "./components/Answer";
+import QuestionParagraph from "./components/QuestionParagraph.js"
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";
@@ -11,13 +11,6 @@ import theme from "./styles/theme";
 import styles from "./styles/style";
 import getQuestions from "./models/questions";
 
-const QuestionParagraph = ({ question }) => {
-    return (
-        <h2>
-            <pre>{question}</pre>
-        </h2>
-    );
-};
 
 class App extends React.Component {
     state = {
@@ -67,7 +60,7 @@ class App extends React.Component {
             button.style.bottom = "0px";
         });
 
-        const bottomPossition = mainContainer.clientHeight - mainContainer.scrollHeight;
+        const bottomPossition = mainContainer.clientHeight - mainContainer.scrollHeight + 20;
 
         buttons.forEach(button => {
             button.style.bottom = bottomPossition + "px";

@@ -1,6 +1,6 @@
 const styles = theme => ({
     paper: {
-        overflow: "scroll",
+        overflowX: "hidden",
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing.unit * 2,
         paddingBottom: "70px",
@@ -10,27 +10,24 @@ const styles = theme => ({
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
         width: "70%",
-        height: "60%",
+        height: "80%",
     },
     btnNext: {
         margin: theme.spacing.unit,
         marginTop: "20px",
         position: "absolute",
-        bottom: 20,
         right: 20,
     },
     btnPrev: {
         margin: theme.spacing.unit,
         marginTop: "20px",
         position: "absolute",
-        bottom: 20,
         right: 100,
     },
     btnSubmit: {
         margin: theme.spacing.unit,
         marginTop: "20px",
         position: "absolute",
-        bottom: 20,
         right: 20,
     },
     logo: {
@@ -42,8 +39,16 @@ const styles = theme => ({
         margin: "15px 5px 5px 10px",
     },
     answerTypography: {
-        fontSize: "17px",
+        fontSize: "15px",
         display: "inline-block"
+    },
+    questionParagraph: {
+        font: "-webkit-control",
+        fontWeight: "bold",
+        fontSize: "17px",
+        marginTop: "20px",
+        marginBottom: "0px",
+        overflow: "auto"
     }
 });
 
