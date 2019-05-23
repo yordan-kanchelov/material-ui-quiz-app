@@ -9,9 +9,7 @@ import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
-import getQuestions from "./models/questions";
-
-
+import getQuestions from "./models/factories/get-questions-service"
 class App extends React.Component {
     state = {
         questions: getQuestions(),
@@ -26,6 +24,7 @@ class App extends React.Component {
     componentDidMount() {
         window.onorientationchange = () => this._updateButtonsPos();
         window.onresize =() => this._updateButtonsPos();
+
 
         this._updateButtonsPos()       
         
@@ -132,3 +131,4 @@ class App extends React.Component {
 }
 
 export default withStyles(styles)(App);
+
