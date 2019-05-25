@@ -1,4 +1,6 @@
 import blue from "@material-ui/core/colors/lightBlue";
+import lightGreen from "@material-ui/core/colors/lightGreen"
+
 import { createMuiTheme } from "@material-ui/core/styles";
 
 
@@ -11,10 +13,10 @@ const theme = createMuiTheme({
             contrastText: "#fff"
         },
         secondary: {
-            light: "#ff7961",
-            main: "#f44336",
-            dark: "#ba000d",
-            contrastText: "#000"
+            light: lightGreen[200],
+            main: lightGreen[400],
+            dark: lightGreen[700],
+            contrastText: "#fff"
         }
     }
 });

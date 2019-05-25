@@ -10,6 +10,7 @@ import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
 import questionsFactoryService from "./models/factories/get-questions-service";
+import CircularLoading from "./components/CircularLoading";
 class App extends React.Component {
     state = {
         questions: null,
@@ -85,61 +86,61 @@ class App extends React.Component {
         const { classes } = this.props;
 
         return (
-            <div className="App">
-                <MuiThemeProvider theme={theme}>
-                    <Paper className={classes.paper} elevation={2}>
-                        <img src={logo} className={classes.logo} alt="logo" />
-                        <hr width={"100%"} />
+            <MuiThemeProvider theme={theme}>
+                <Paper className={classes.paper} elevation={2}>
+                    <img src={logo} className={classes.logo} alt="logo" />
+                    <hr width={"100%"} />
 
-                        {this.questionsLoaded() ? (
-                            <div>
-                                <QuestionParagraph question={this.getCurrentQuestion()} />
+                    {this.questionsLoaded() ? (
+                        <div>
+                            <QuestionParagraph question={this.getCurrentQuestion()} />
 
-                                <div className={classes.answerContainer}>
-                                    {this.getCurrentAnswers().map((currentAnswer, index) => {
-                                        return <Answer answer={currentAnswer} key={index} />;
-                                    })}
-                                </div>
-
-                                <div id="buttonsContainer">
-                                    {this.shouldShowSubmit() ? (
-                                        <Button
-                                            variant="contained"
-                                            className={classes.btnSubmit}
-                                            onClick={this.onSubmitClick}
-                                            color="primary"
-                                        >
-                                            Submit
-                                        </Button>
-                                    ) : null}
-
-                                    {this.shouldShowNext() ? (
-                                        <Button
-                                            variant="contained"
-                                            className={classes.btnNext}
-                                            onClick={this.onNextClick}
-                                            color="primary"
-                                        >
-                                            Next
-                                        </Button>
-                                    ) : null}
-
-                                    {this.shouldShowPrev() ? (
-                                        <Button
-                                            variant="contained"
-                                            className={classes.btnPrev}
-                                            onClick={this.onPrevClick}
-                                            color="primary"
-                                        >
-                                            Prev
-                                        </Button>
-                                    ) : null}
-                                </div>
+                            <div className={classes.answerContainer}>
+                                {this.getCurrentAnswers().map((currentAnswer, index) => {
+                                    return <Answer answer={currentAnswer} key={index} />;
+                                })}
                             </div>
-                        ) : null}
-                    </Paper>
-                </MuiThemeProvider>
-            </div>
+
+                            <div id="buttonsContainer">
+                                {this.shouldShowSubmit() ? (
+                                    <Button
+                                        variant="contained"
+                                        className={classes.btnSubmit}
+                                        onClick={this.onSubmitClick}
+                                        color="primary"
+                                    >
+                                        Submit
+                                    </Button>
+                                ) : null}
+
+                                {this.shouldShowNext() ? (
+                                    <Button
+                                        variant="contained"
+                                        className={classes.btnNext}
+                                        onClick={this.onNextClick}
+                                        color="primary"
+                                    >
+                                        Next
+                                    </Button>
+                                ) : null}
+
+                                {this.shouldShowPrev() ? (
+                                    <Button
+                                        variant="contained"
+                                        className={classes.btnPrev}
+                                        onClick={this.onPrevClick}
+                                        color="primary"
+                                    >
+                                        Prev
+                                    </Button>
+                                ) : null}
+                            </div>
+                        </div>
+                    ) : (
+                        <CircularLoading />
+                    )}
+                </Paper>
+            </MuiThemeProvider>
         );
     }
 }
