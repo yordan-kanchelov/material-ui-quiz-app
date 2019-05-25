@@ -18,17 +18,17 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        this._updateButtonsPos();
+        this.updateButtonsPos();
     }
 
     componentDidMount() {
-        window.onorientationchange = () => this._updateButtonsPos();
-        window.onresize = () => this._updateButtonsPos();
+        window.onorientationchange = () => this.updateButtonsPos();
+        window.onresize = () => this.updateButtonsPos();
 
-        this._updateButtonsPos();
+        this.updateButtonsPos();
 
         setTimeout(() => {
-            this._updateButtonsPos();
+            this.updateButtonsPos();
         }, 0);
     }
 
@@ -50,7 +50,7 @@ class App extends React.Component {
         console.log("submit");
     };
 
-    _updateButtonsPos = () => {
+    updateButtonsPos = () => {
         let buttons = Array.from(document.getElementById("buttonsContainer").children);
         let mainContainer = document.querySelector("#root > div > div");
 
