@@ -1,7 +1,34 @@
 body {
-    background-color: 	rgba(240, 240, 240, 0.884);
+    background-color: rgba(240, 240, 240, 0.884);
 }
 
 * {
     touch-action: manipulation;
+}
+
+.mainApp-enter {
+    opacity: 0.01;
+}
+
+.mainApp-enter.mainApp-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+}
+
+.mainApp-leave {
+    opacity: 1;
+}
+
+.mainApp-leave.mainApp-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.mainApp-appear {
+    opacity: 0.01;
+}
+
+.mainApp-appear.mainApp-appear-active {
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }

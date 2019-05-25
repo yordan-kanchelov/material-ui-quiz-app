@@ -11,7 +11,12 @@ import theme from "./styles/theme";
 import styles from "./styles/style";
 import questionsFactoryService from "./models/factories/get-questions-service";
 import CircularLoading from "./components/CircularLoading";
+
+import { CSSTransitionGroup } from "react-transition-group";
+
 class App extends React.Component {
+    lastTimeButtonClicked = new Date().getTime();
+
     state = {
         questions: null,
         clientAnswerIndexes: [],
@@ -41,6 +46,12 @@ class App extends React.Component {
 
     onNextClick = e => {
         const currentState = this.state;
+
+        if(currentState.currentQuestionIndex === currentState.questions.length - 1 || this.areButtonsAnimating()) {
+            return;
+        }
+
+        this.lastTimeButtonClicked = new Date().getTime();
         this.setState({
             currentQuestionIndex: ++currentState.currentQuestionIndex
         });
@@ -48,6 +59,12 @@ class App extends React.Component {
 
     onPrevClick = e => {
         const currentState = this.state;
+
+        if (currentState.currentQuestionIndex === 0 || this.areButtonsAnimating()) {
+            return;
+        }
+
+        this.lastTimeButtonClicked = new Date().getTime();
         this.setState({
             currentQuestionIndex: --currentState.currentQuestionIndex
         });
@@ -63,7 +80,7 @@ class App extends React.Component {
         }
 
         let buttons = Array.from(document.getElementById("buttonsContainer").children);
-        let mainContainer = document.querySelector("#root > div > div");
+        let mainContainer = document.querySelector("#root > span > div");
 
         buttons.forEach(button => {
             button.style.bottom = "0px";
@@ -81,65 +98,98 @@ class App extends React.Component {
     shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
     shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
     shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
+    
+    areButtonsAnimating = () => {
+        const transitionTime = 600;
+        const currentTime = new Date().getTime() 
+        
+        return currentTime - transitionTime <= this.lastTimeButtonClicked; 
+    }
+
+    addCssTransition = elem => {
+        return (
+            <CSSTransitionGroup
+                transitionName="mainApp"
+                transitionAppear={true}
+                transitionEnterTimeout={500}
+                transitionAppearTimeout={500}
+                transitionLeave={false}
+                transitionLeaveTimeout={500}
+            >
+                {elem}
+            </CSSTransitionGroup>
+        );
+    };
 
     render() {
         const { classes } = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
-                <Paper className={classes.paper} elevation={2}>
-                    <img src={logo} className={classes.logo} alt="logo" />
-                    <hr width={"100%"} />
+                {this.addCssTransition(
+                    <Paper className={classes.paper} elevation={2}>
+                        <img key={"logo"} src={logo} className={classes.logo} alt="logo" />
+                        <hr key={"horizontalLine"} width={"100%"} />
+                        {this.questionsLoaded() ? (
+                            <div>
+                                {this.addCssTransition(
+                                    <div key={this.getCurrentQuestion()}>
+                                        <QuestionParagraph
+                                            key={this.getCurrentQuestion()}
+                                            question={this.getCurrentQuestion()}
+                                        />
 
-                    {this.questionsLoaded() ? (
-                        <div>
-                            <QuestionParagraph question={this.getCurrentQuestion()} />
+                                        <div className={classes.answerContainer}>
+                                            {this.getCurrentAnswers().map((currentAnswer, index) => (
+                                                <Answer
+                                                    key={this.getCurrentQuestion() + index}
+                                                    answer={currentAnswer}
+                                                />
+                                            ))}
+                                        </div>
 
-                            <div className={classes.answerContainer}>
-                                {this.getCurrentAnswers().map((currentAnswer, index) => {
-                                    return <Answer answer={currentAnswer} key={index} />;
-                                })}
+                                        <div id="buttonsContainer">
+                                            {this.shouldShowSubmit() ? (
+                                                <Button
+                                                    variant="contained"
+                                                    className={classes.btnSubmit}
+                                                    onClick={this.onSubmitClick}
+                                                    color="primary"
+                                                >
+                                                    Submit
+                                                </Button>
+                                            ) : null}
+
+                                            {this.shouldShowNext() ? (
+                                                <Button
+                                                    variant="contained"
+                                                    className={classes.btnNext}
+                                                    onClick={this.onNextClick}
+                                                    color="primary"
+                                                >
+                                                    Next
+                                                </Button>
+                                            ) : null}
+
+                                            {this.shouldShowPrev() ? (
+                                                <Button
+                                                    variant="contained"
+                                                    className={classes.btnPrev}
+                                                    onClick={this.onPrevClick}
+                                                    color="primary"
+                                                >
+                                                    Prev
+                                                </Button>
+                                            ) : null}
+                                        </div>
+                                    </div>
+                                )}
                             </div>
-
-                            <div id="buttonsContainer">
-                                {this.shouldShowSubmit() ? (
-                                    <Button
-                                        variant="contained"
-                                        className={classes.btnSubmit}
-                                        onClick={this.onSubmitClick}
-                                        color="primary"
-                                    >
-                                        Submit
-                                    </Button>
-                                ) : null}
-
-                                {this.shouldShowNext() ? (
-                                    <Button
-                                        variant="contained"
-                                        className={classes.btnNext}
-                                        onClick={this.onNextClick}
-                                        color="primary"
-                                    >
-                                        Next
-                                    </Button>
-                                ) : null}
-
-                                {this.shouldShowPrev() ? (
-                                    <Button
-                                        variant="contained"
-                                        className={classes.btnPrev}
-                                        onClick={this.onPrevClick}
-                                        color="primary"
-                                    >
-                                        Prev
-                                    </Button>
-                                ) : null}
-                            </div>
-                        </div>
-                    ) : (
-                        <CircularLoading />
-                    )}
-                </Paper>
+                        ) : (
+                            <CircularLoading key={"loadingCircle"} />
+                        )}
+                    </Paper>
+                )}
             </MuiThemeProvider>
         );
     }
