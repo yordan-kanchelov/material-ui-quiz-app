@@ -2,8 +2,8 @@ import React from "react";
 
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
-import styles from "../styles/style";
-import theme from "../styles/theme";
+import questionStyle from "./question-style";
+import theme from "../../styles/theme";
 
 class QuestionParagraph extends React.Component {
     render() {
@@ -17,4 +17,4 @@ class QuestionParagraph extends React.Component {
     }
 }
 
-export default withStyles(styles)(QuestionParagraph);
+export default withStyles(questionStyle)(QuestionParagraph);

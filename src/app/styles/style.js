@@ -32,23 +32,6 @@ const styles = theme => ({
     },
     logo: {
         marginTop: "2px"
-    },
-    answerContainer : {
-    },
-    answer: {
-        margin: "15px 5px 5px 10px",
-    },
-    answerTypography: {
-        fontSize: "15px",
-        display: "inline-block"
-    },
-    questionParagraph: {
-        font: "-webkit-control",
-        fontWeight: "bold",
-        fontSize: "17px",
-        marginTop: "20px",
-        marginBottom: "0px",
-        overflow: "auto"
     }
 });
 

@@ -2,8 +2,8 @@ import React from "react";
 
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import Answer from "./components/Answer";
-import QuestionParagraph from "./components/QuestionParagraph.js";
+import Answer from "./components/Answer/Answer";
+import QuestionParagraph from "./components/Question/Question.js";
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";

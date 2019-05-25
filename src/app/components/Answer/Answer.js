@@ -5,8 +5,8 @@ import Typography from "@material-ui/core/Typography";
 
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
-import styles from "../styles/style";
-import theme from "../styles/theme";
+import styles from "./answer-style";
+import theme from "../../styles/theme";
 
 class Answer extends React.Component {
     state = {
