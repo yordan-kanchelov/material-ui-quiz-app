@@ -9,10 +9,10 @@ import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
-import getQuestions from "./models/factories/get-questions-service";
+import questionsFactoryService from "./models/factories/get-questions-service";
 class App extends React.Component {
     state = {
-        questions: getQuestions(),
+        questions: null,
         clientAnswerIndexes: [],
         currentQuestionIndex: 0
     };
@@ -24,6 +24,12 @@ class App extends React.Component {
     componentDidMount() {
         window.onorientationchange = () => this.updateButtonsPos();
         window.onresize = () => this.updateButtonsPos();
+
+        questionsFactoryService(false).then(value => {
+            this.setState({ questions: value }, () => {
+                this.updateButtonsPos();
+            });
+        });
 
         this.updateButtonsPos();
 
@@ -51,6 +57,10 @@ class App extends React.Component {
     };
 
     updateButtonsPos = () => {
+        if (!this.questionsLoaded()) {
+            return false;
+        }
+
         let buttons = Array.from(document.getElementById("buttonsContainer").children);
         let mainContainer = document.querySelector("#root > div > div");
 
@@ -64,6 +74,7 @@ class App extends React.Component {
             button.style.bottom = bottomPosition + "px";
         });
     };
+    questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
     shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
@@ -80,48 +91,52 @@ class App extends React.Component {
                         <img src={logo} className={classes.logo} alt="logo" />
                         <hr width={"100%"} />
 
-                        <QuestionParagraph question={this.getCurrentQuestion()} />
+                        {this.questionsLoaded() ? (
+                            <div>
+                                <QuestionParagraph question={this.getCurrentQuestion()} />
 
-                        <div className={classes.answerContainer}>
-                            {this.getCurrentAnswers().map((currentAnswer, index) => {
-                                return <Answer answer={currentAnswer} key={index} />;
-                            })}
-                        </div>
+                                <div className={classes.answerContainer}>
+                                    {this.getCurrentAnswers().map((currentAnswer, index) => {
+                                        return <Answer answer={currentAnswer} key={index} />;
+                                    })}
+                                </div>
 
-                        <div id="buttonsContainer">
-                            {this.shouldShowSubmit() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.btnSubmit}
-                                    onClick={this.onSubmitClick}
-                                    color="primary"
-                                >
-                                    Submit
-                                </Button>
-                            ) : null}
+                                <div id="buttonsContainer">
+                                    {this.shouldShowSubmit() ? (
+                                        <Button
+                                            variant="contained"
+                                            className={classes.btnSubmit}
+                                            onClick={this.onSubmitClick}
+                                            color="primary"
+                                        >
+                                            Submit
+                                        </Button>
+                                    ) : null}
 
-                            {this.shouldShowNext() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.btnNext}
-                                    onClick={this.onNextClick}
-                                    color="primary"
-                                >
-                                    Next
-                                </Button>
-                            ) : null}
+                                    {this.shouldShowNext() ? (
+                                        <Button
+                                            variant="contained"
+                                            className={classes.btnNext}
+                                            onClick={this.onNextClick}
+                                            color="primary"
+                                        >
+                                            Next
+                                        </Button>
+                                    ) : null}
 
-                            {this.shouldShowPrev() ? (
-                                <Button
-                                    variant="contained"
-                                    className={classes.btnPrev}
-                                    onClick={this.onPrevClick}
-                                    color="primary"
-                                >
-                                    Prev
-                                </Button>
-                            ) : null}
-                        </div>
+                                    {this.shouldShowPrev() ? (
+                                        <Button
+                                            variant="contained"
+                                            className={classes.btnPrev}
+                                            onClick={this.onPrevClick}
+                                            color="primary"
+                                        >
+                                            Prev
+                                        </Button>
+                                    ) : null}
+                                </div>
+                            </div>
+                        ) : null}
                     </Paper>
                 </MuiThemeProvider>
             </div>

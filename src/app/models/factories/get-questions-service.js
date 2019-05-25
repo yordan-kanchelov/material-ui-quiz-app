@@ -5,8 +5,7 @@ const getQuestionsFactory = (server = null) => {
         // TODO: 
         // implement
     } else {
-        console.log("nana")
-        return LocalQuestions.getQuestions();
+        return LocalQuestions();
     }
 }
 

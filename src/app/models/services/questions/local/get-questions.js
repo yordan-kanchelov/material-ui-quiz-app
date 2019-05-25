@@ -1,12 +1,16 @@
 import questionsData from "./questionsData";
 
-export default {
-    getQuestions: () => {
-        return questionsData.map(question => {
-            return {
-                question: question.question,
-                answer: question.answer
-            };
-        });
-    }
+export default () => {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve(
+                questionsData.map(question => {
+                    return {
+                        question: question.question,
+                        answer: question.answer
+                    };
+                })
+            );
+        }, 100);
+    });
 };
