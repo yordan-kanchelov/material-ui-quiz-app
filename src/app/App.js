@@ -3,13 +3,13 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Answer from "./components/Answer";
-import QuestionParagraph from "./components/QuestionParagraph.js"
+import QuestionParagraph from "./components/QuestionParagraph.js";
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
-import getQuestions from "./models/factories/get-questions-service"
+import getQuestions from "./models/factories/get-questions-service";
 class App extends React.Component {
     state = {
         questions: getQuestions(),
@@ -18,19 +18,18 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        this._updateButtonsPos()
+        this._updateButtonsPos();
     }
 
     componentDidMount() {
         window.onorientationchange = () => this._updateButtonsPos();
-        window.onresize =() => this._updateButtonsPos();
+        window.onresize = () => this._updateButtonsPos();
 
+        this._updateButtonsPos();
 
-        this._updateButtonsPos()       
-        
         setTimeout(() => {
-            this._updateButtonsPos()        
-        },0)
+            this._updateButtonsPos();
+        }, 0);
     }
 
     onNextClick = e => {
@@ -51,7 +50,7 @@ class App extends React.Component {
         console.log("submit");
     };
 
-    _updateButtonsPos =() => {
+    _updateButtonsPos = () => {
         let buttons = Array.from(document.getElementById("buttonsContainer").children);
         let mainContainer = document.querySelector("#root > div > div");
 
@@ -59,17 +58,17 @@ class App extends React.Component {
             button.style.bottom = "0px";
         });
 
-        const bottomPossition = mainContainer.clientHeight - mainContainer.scrollHeight + 20;
+        const bottomPosition = mainContainer.clientHeight - mainContainer.scrollHeight + 20;
 
         buttons.forEach(button => {
-            button.style.bottom = bottomPossition + "px";
+            button.style.bottom = bottomPosition + "px";
         });
-    }
-    _getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
-    _getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
-    _shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
-    _shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
-    _shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
+    };
+    getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
+    getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
+    shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
+    shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
+    shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
 
     render() {
         const { classes } = this.props;
@@ -81,16 +80,16 @@ class App extends React.Component {
                         <img src={logo} className={classes.logo} alt="logo" />
                         <hr width={"100%"} />
 
-                        <QuestionParagraph question={this._getCurrentQuestion()} />
+                        <QuestionParagraph question={this.getCurrentQuestion()} />
 
                         <div className={classes.answerContainer}>
-                            {this._getCurrentAnswers().map((currentAnswer, index) => {
+                            {this.getCurrentAnswers().map((currentAnswer, index) => {
                                 return <Answer answer={currentAnswer} key={index} />;
                             })}
                         </div>
 
                         <div id="buttonsContainer">
-                            {this._shouldShowSubmit() ? (
+                            {this.shouldShowSubmit() ? (
                                 <Button
                                     variant="contained"
                                     className={classes.btnSubmit}
@@ -101,7 +100,7 @@ class App extends React.Component {
                                 </Button>
                             ) : null}
 
-                            {this._shouldShowNext() ? (
+                            {this.shouldShowNext() ? (
                                 <Button
                                     variant="contained"
                                     className={classes.btnNext}
@@ -112,7 +111,7 @@ class App extends React.Component {
                                 </Button>
                             ) : null}
 
-                            {this._shouldShowPrev() ? (
+                            {this.shouldShowPrev() ? (
                                 <Button
                                     variant="contained"
                                     className={classes.btnPrev}
@@ -131,4 +130,3 @@ class App extends React.Component {
 }
 
 export default withStyles(styles)(App);
-
