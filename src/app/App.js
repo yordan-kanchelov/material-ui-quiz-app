@@ -25,6 +25,10 @@ class App extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         this.updateButtonsPos();
+
+        setTimeout(() => {
+            this.updateButtonsPos();
+        }, 500);
     }
 
     componentDidMount() {
@@ -80,7 +84,7 @@ class App extends React.Component {
         }
 
         let buttons = Array.from(document.getElementById("buttonsContainer").children);
-        let mainContainer = document.querySelector("#root > span > div");
+        let mainContainer = document.getElementById("mainContainer");
 
         buttons.forEach(button => {
             button.style.bottom = "0px";
@@ -127,7 +131,7 @@ class App extends React.Component {
         return (
             <MuiThemeProvider theme={theme}>
                 {this.addCssTransition(
-                    <Paper className={classes.paper} elevation={2}>
+                    <Paper id="mainContainer" className={classes.paper} elevation={2}>
                         <img key={"logo"} src={logo} className={classes.logo} alt="logo" />
                         <hr key={"horizontalLine"} width={"100%"} />
                         {this.questionsLoaded() ? (
