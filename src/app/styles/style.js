@@ -2,7 +2,7 @@ const styles = theme => ({
     paper: {
         overflowX: "hidden",
         ...theme.mixins.gutters(),
-        paddingTop: theme.spacing.unit * 2,
+        paddingTop: theme.spacing(2),
         paddingBottom: "70px",
         position: "absolute",
         top: "50%",
@@ -13,19 +13,19 @@ const styles = theme => ({
         height: "80%",
     },
     btnNext: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
         right: 20,
     },
     btnPrev: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
         right: 100,
     },
     btnSubmit: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
         right: 20,
