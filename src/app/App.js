@@ -55,7 +55,8 @@ class App extends React.Component {
             return;
         }
 
-        this.updatePage(currentState.currentQuestionIndex++);
+        console.log(currentState.currentQuestionIndex)
+        this.updatePage(++currentState.currentQuestionIndex);
     };
 
     onPrevClick = e => {
@@ -65,7 +66,7 @@ class App extends React.Component {
             return;
         }
 
-        this.updatePage(currentState.currentQuestionIndex--);
+        this.updatePage(--currentState.currentQuestionIndex);
     };
 
     onSubmitClick = e => {
