@@ -3,9 +3,14 @@ const styles = theme => ({
         font: "-webkit-control",
         fontWeight: "bold",
         fontSize: "17px",
-        marginTop: "20px",
         marginBottom: "0px",
-        overflow: "auto"
+        overflow: "auto",
+        marginTop: "0px"
+    },
+    questionNumber: {
+        marginTop: "20px",
+        marginBottom: "10px"
+
     }
 });
 

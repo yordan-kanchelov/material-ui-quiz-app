@@ -19,7 +19,8 @@ class QuestionParagraph extends React.Component {
                     transitionAppearTimeout={500}
                     transitionLeave={true}
                     transitionLeaveTimeout={300}
-                >
+                >   
+                    <div className={classes.questionNumber}> {`Question ${this.props.questionIndex}/${this.props.questionsLength} :`} </div>
                     <pre className={classes.questionParagraph}>{this.props.question}</pre>
                 </CSSTransitionGroup>
             </MuiThemeProvider>

@@ -146,6 +146,8 @@ class App extends React.Component {
                                         <QuestionParagraph
                                             key={this.getCurrentQuestion()}
                                             question={this.getCurrentQuestion()}
+                                            questionIndex={this.state.currentQuestionIndex + 1}
+                                            questionsLength={this.state.questions.length}
                                         />
 
                                         <div className={classes.answerContainer}>
