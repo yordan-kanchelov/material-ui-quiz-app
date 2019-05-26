@@ -24,8 +24,6 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        document.getElementById("mainContainer").scrollTop = 0;
-
         this.updateButtonsPos();
 
         setTimeout(() => {
@@ -57,10 +55,7 @@ class App extends React.Component {
             return;
         }
 
-        this.lastTimeButtonClicked = new Date().getTime();
-        this.setState({
-            currentQuestionIndex: ++currentState.currentQuestionIndex
-        });
+        this.updatePage(currentState.currentQuestionIndex++);
     };
 
     onPrevClick = e => {
@@ -70,10 +65,7 @@ class App extends React.Component {
             return;
         }
 
-        this.lastTimeButtonClicked = new Date().getTime();
-        this.setState({
-            currentQuestionIndex: --currentState.currentQuestionIndex
-        });
+        this.updatePage(currentState.currentQuestionIndex--);
     };
 
     onSubmitClick = e => {
@@ -98,6 +90,14 @@ class App extends React.Component {
             button.style.bottom = bottomPosition + "px";
         });
     };
+
+    updatePage = (questionIndex) => {
+        this.lastTimeButtonClicked = new Date().getTime();
+        document.getElementById("mainContainer").scrollTop = 0;
+        this.setState({
+            currentQuestionIndex: questionIndex
+        });
+    }
     questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
