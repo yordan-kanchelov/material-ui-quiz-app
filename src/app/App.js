@@ -24,11 +24,13 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
-        this.updateButtonsPos();
-
         setTimeout(() => {
             this.updateButtonsPos();
-        }, 500);
+        }, 0);
+
+        // setTimeout(() => {
+        //     this.updateButtonsPos();
+        // }, 500);
     }
 
     componentDidMount() {
@@ -51,11 +53,11 @@ class App extends React.Component {
     onNextClick = e => {
         const currentState = this.state;
 
-        if(currentState.currentQuestionIndex === currentState.questions.length - 1 || this.areButtonsAnimating()) {
+        if (currentState.currentQuestionIndex === currentState.questions.length - 1 || this.areButtonsAnimating()) {
             return;
         }
 
-        console.log(currentState.currentQuestionIndex)
+        console.log(currentState.currentQuestionIndex);
         this.updatePage(++currentState.currentQuestionIndex);
     };
 
@@ -92,26 +94,26 @@ class App extends React.Component {
         });
     };
 
-    updatePage = (questionIndex) => {
+    updatePage = questionIndex => {
         this.lastTimeButtonClicked = new Date().getTime();
         document.getElementById("mainContainer").scrollTop = 0;
         this.setState({
             currentQuestionIndex: questionIndex
         });
-    }
+    };
     questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
     shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
     shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
     shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
-    
+
     areButtonsAnimating = () => {
         const transitionTime = 600;
-        const currentTime = new Date().getTime() 
-        
-        return currentTime - transitionTime <= this.lastTimeButtonClicked; 
-    }
+        const currentTime = new Date().getTime();
+
+        return currentTime - transitionTime <= this.lastTimeButtonClicked;
+    };
 
     addCssTransition = elem => {
         return (
