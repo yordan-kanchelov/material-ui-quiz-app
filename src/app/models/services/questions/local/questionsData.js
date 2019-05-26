@@ -157,7 +157,27 @@ const questions = [
         ],
         correctAnswerIndex: 2
     },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    {
+        question: `
+    public class MyOuter 
+    {
+        public static class MyInner 
+        {
+            public static void foo() { }
+        }
+    }
+    
+    Which statement, if placed in a class other than MyOuter or MyInner, instantiates an instance of the nested class?
+    `,
+        answer: [
+            `MyOuter m = new MyOuter();
+MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
+            `MyOuter.MyInner m = new MyOuter.MyInner();`,
+            `MyOuter.MyInner mi = new MyInner();`,
+            `MyInner mi = new MyOuter.MyInner();`
+        ],
+        correctAnswerIndex: 1
+    },
     // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
     // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
     // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
