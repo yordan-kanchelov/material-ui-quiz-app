@@ -24,6 +24,8 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
+        document.getElementById("mainContainer").scrollTop = 0;
+
         this.updateButtonsPos();
 
         setTimeout(() => {
