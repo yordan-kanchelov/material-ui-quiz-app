@@ -9,17 +9,13 @@ import styles from "./answer-style";
 import theme from "../../styles/theme";
 
 class Answer extends React.Component {
-    state = {
-        selected: false
-    };
-
     render() {
         const { classes } = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
                 <div className={classes.answer}>
-                    <Radio checked={this.state.selected} />
+                    <Radio id={this.props.answerIndex.toString()} checked={this.props.isSelected} onClick={this.props.onAnswerSelect.bind(this)}/>
                     <Typography className={classes.answerTypography} component="pre">
                         {this.props.answer}
                     </Typography>

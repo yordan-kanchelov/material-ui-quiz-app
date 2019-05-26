@@ -24,12 +24,13 @@ class App extends React.Component {
     };
 
     componentDidUpdate(prevProps, prevState) {
+        this.updateButtonsPos();
+
         setTimeout(() => {
             this.updateButtonsPos();
         }, 0);
 
         // setTimeout(() => {
-        //     this.updateButtonsPos();
         // }, 500);
     }
 
@@ -75,6 +76,17 @@ class App extends React.Component {
         console.log("submit");
     };
 
+    onAnswerSelected = e => {
+        let clickedAnswerIndex = +e.target.id;
+        let currentState = this.state;
+        const currentAnswers = this.state.clientAnswerIndexes;
+        currentAnswers[currentState.currentQuestionIndex] = clickedAnswerIndex;
+
+        this.setState({
+            userAnswerIndexes: currentAnswers,
+        })
+    }
+
     updateButtonsPos = () => {
         if (!this.questionsLoaded()) {
             return false;
@@ -104,8 +116,11 @@ class App extends React.Component {
     questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
-    shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1;
-    shouldShowNext = () => this.state.currentQuestionIndex !== this.state.questions.length - 1;
+    isAnswerSelected = answerIndex => this.state.clientAnswerIndexes[this.state.currentQuestionIndex] === answerIndex;
+    shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1 && this.state.clientAnswerIndexes[this.state.questions.length - 1] !== undefined;;
+    shouldShowNext = () =>
+        this.state.currentQuestionIndex !== this.state.questions.length - 1 &&
+        this.state.clientAnswerIndexes[this.state.currentQuestionIndex] !== undefined;
     shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
 
     areButtonsAnimating = () => {
@@ -153,8 +168,11 @@ class App extends React.Component {
                                         <div className={classes.answerContainer}>
                                             {this.getCurrentAnswers().map((currentAnswer, index) => (
                                                 <Answer
+                                                    answerIndex = {index}
                                                     key={this.getCurrentQuestion() + index}
                                                     answer={currentAnswer}
+                                                    isSelected={this.isAnswerSelected(index)}
+                                                    onAnswerSelect={this.onAnswerSelected}
                                                 />
                                             ))}
                                         </div>
@@ -185,7 +203,11 @@ class App extends React.Component {
                                             {this.shouldShowPrev() ? (
                                                 <Button
                                                     variant="contained"
-                                                    className={classes.btnPrev}
+                                                    className={
+                                                        this.shouldShowSubmit()
+                                                            ? classes.btnPrevSubmit
+                                                            : classes.btnPrev
+                                                    }
                                                     onClick={this.onPrevClick}
                                                     color="primary"
                                                 >

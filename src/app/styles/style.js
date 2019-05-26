@@ -24,6 +24,12 @@ const styles = theme => ({
         position: "absolute",
         right: 100,
     },
+    btnPrevSubmit: {
+        margin: theme.spacing(),
+        marginTop: "20px",
+        position: "absolute",
+        right: 120,
+    },
     btnSubmit: {
         margin: theme.spacing(),
         marginTop: "20px",
