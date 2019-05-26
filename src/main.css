@@ -32,3 +32,14 @@ body {
     opacity: 1;
     transition: opacity 0.5s ease-in;
 }
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(85, 85, 85, 0.164);
+    box-shadow: 0 0 1px rgba(54, 52, 52, 0.5);
+}
+
+::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+}

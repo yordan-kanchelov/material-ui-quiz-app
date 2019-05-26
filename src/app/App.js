@@ -83,9 +83,9 @@ class App extends React.Component {
         currentAnswers[currentState.currentQuestionIndex] = clickedAnswerIndex;
 
         this.setState({
-            userAnswerIndexes: currentAnswers,
-        })
-    }
+            userAnswerIndexes: currentAnswers
+        });
+    };
 
     updateButtonsPos = () => {
         if (!this.questionsLoaded()) {
@@ -96,13 +96,13 @@ class App extends React.Component {
         let mainContainer = document.getElementById("mainContainer");
 
         buttons.forEach(button => {
-            button.style.bottom = "0px";
+            button.children[0].style.bottom = "0px";
         });
 
         const bottomPosition = mainContainer.clientHeight - mainContainer.scrollHeight + 20;
 
         buttons.forEach(button => {
-            button.style.bottom = bottomPosition + "px";
+            button.children[0].style.bottom = bottomPosition + "px";
         });
     };
 
@@ -117,7 +117,9 @@ class App extends React.Component {
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
     isAnswerSelected = answerIndex => this.state.clientAnswerIndexes[this.state.currentQuestionIndex] === answerIndex;
-    shouldShowSubmit = () => this.state.currentQuestionIndex === this.state.questions.length - 1 && this.state.clientAnswerIndexes[this.state.questions.length - 1] !== undefined;;
+    shouldShowSubmit = () =>
+        this.state.currentQuestionIndex === this.state.questions.length - 1 &&
+        this.state.clientAnswerIndexes[this.state.questions.length - 1] !== undefined;
     shouldShowNext = () =>
         this.state.currentQuestionIndex !== this.state.questions.length - 1 &&
         this.state.clientAnswerIndexes[this.state.currentQuestionIndex] !== undefined;
@@ -159,7 +161,6 @@ class App extends React.Component {
                                 {this.addCssTransition(
                                     <div key={this.getCurrentQuestion()}>
                                         <QuestionParagraph
-                                            key={this.getCurrentQuestion()}
                                             question={this.getCurrentQuestion()}
                                             questionIndex={this.state.currentQuestionIndex + 1}
                                             questionsLength={this.state.questions.length}
@@ -168,7 +169,7 @@ class App extends React.Component {
                                         <div className={classes.answerContainer}>
                                             {this.getCurrentAnswers().map((currentAnswer, index) => (
                                                 <Answer
-                                                    answerIndex = {index}
+                                                    answerIndex={index}
                                                     key={this.getCurrentQuestion() + index}
                                                     answer={currentAnswer}
                                                     isSelected={this.isAnswerSelected(index)}
@@ -178,42 +179,48 @@ class App extends React.Component {
                                         </div>
 
                                         <div id="buttonsContainer">
-                                            {this.shouldShowSubmit() ? (
-                                                <Button
-                                                    variant="contained"
-                                                    className={classes.btnSubmit}
-                                                    onClick={this.onSubmitClick}
-                                                    color="primary"
-                                                >
-                                                    Submit
-                                                </Button>
-                                            ) : null}
+                                            {this.shouldShowSubmit()
+                                                ? this.addCssTransition(
+                                                      <Button
+                                                          variant="contained"
+                                                          className={classes.btnSubmit}
+                                                          onClick={this.onSubmitClick}
+                                                          color="primary"
+                                                      >
+                                                          Submit
+                                                      </Button>
+                                                  )
+                                                : null}
 
-                                            {this.shouldShowNext() ? (
-                                                <Button
-                                                    variant="contained"
-                                                    className={classes.btnNext}
-                                                    onClick={this.onNextClick}
-                                                    color="primary"
-                                                >
-                                                    Next
-                                                </Button>
-                                            ) : null}
+                                            {this.shouldShowNext()
+                                                ? this.addCssTransition(
+                                                      <Button
+                                                          variant="contained"
+                                                          className={classes.btnNext}
+                                                          onClick={this.onNextClick}
+                                                          color="primary"
+                                                      >
+                                                          Next
+                                                      </Button>
+                                                  )
+                                                : null}
 
-                                            {this.shouldShowPrev() ? (
-                                                <Button
-                                                    variant="contained"
-                                                    className={
-                                                        this.shouldShowSubmit()
-                                                            ? classes.btnPrevSubmit
-                                                            : classes.btnPrev
-                                                    }
-                                                    onClick={this.onPrevClick}
-                                                    color="primary"
-                                                >
-                                                    Prev
-                                                </Button>
-                                            ) : null}
+                                            {this.shouldShowPrev()
+                                                ? this.addCssTransition(
+                                                      <Button
+                                                          variant="contained"
+                                                          className={
+                                                              this.shouldShowSubmit()
+                                                                  ? classes.btnPrevSubmit
+                                                                  : classes.btnPrev
+                                                          }
+                                                          onClick={this.onPrevClick}
+                                                          color="primary"
+                                                      >
+                                                          Prev
+                                                      </Button>
+                                                  )
+                                                : null}
                                         </div>
                                     </div>
                                 )}
