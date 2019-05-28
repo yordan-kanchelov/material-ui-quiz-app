@@ -13,7 +13,7 @@ const questions = [
     		// insert code here
     } }
 
-    Which, inserted at line 9, will compile? (Choose all that apply.)
+    Which, inserted at line 9, will compile?
         `,
         answer: ["x2.do2();", "(Y)x2.do2();", "((Y)x2).do2();", "None of the above statements will compile."],
         correctAnswerIndex: 2
@@ -114,7 +114,7 @@ const questions = [
     	}
     }
 
-    Which, inserted independently at line 9, will compile? (Choose all that apply.)
+    Which, inserted independently at line 9, will compile?
     `,
         answer: [
             "return new ArrayList<Inn>();",

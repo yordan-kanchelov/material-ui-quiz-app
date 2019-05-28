@@ -1,4 +1,4 @@
-import questionsData from "./questionsData";
+import questionsData from "./data/questionsData";
 
 export default () => {
     return new Promise(resolve => {
