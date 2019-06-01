@@ -1,6 +1,6 @@
 import LocalQuestions from "../services/questions/local/get-questions"
 
-const getQuestionsFactory = (server = null) => {
+const getQuestions = (server = null) => {
     if(server) {
         // TODO: 
         // implement
@@ -9,5 +9,5 @@ const getQuestionsFactory = (server = null) => {
     }
 }
 
-export default getQuestionsFactory;
+export default getQuestions;
 

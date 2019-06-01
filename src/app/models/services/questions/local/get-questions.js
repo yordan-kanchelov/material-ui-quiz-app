@@ -4,10 +4,11 @@ export default () => {
     return new Promise(resolve => {
         setTimeout(() => {
             resolve(
-                questionsData.map(question => {
+                questionsData.map((question, questionIndex) => {
                     return {
+                        questionIndex,
                         question: question.question,
-                        answer: question.answer
+                        answers: question.answers
                     };
                 })
             );

@@ -9,7 +9,9 @@ import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
-import questionsFactoryService from "./models/factories/get-questions-service";
+import questionsFactory from "./models/factories/get-questions-factory";
+import submitFactory from "./models/factories/submit-questions-factory"
+
 import CircularLoading from "./components/CircularLoading";
 
 import { CSSTransitionGroup } from "react-transition-group";
@@ -19,7 +21,7 @@ class App extends React.Component {
 
     state = {
         questions: null,
-        clientAnswerIndexes: [],
+        questionsAnswers: [],
         currentQuestionIndex: 0
     };
 
@@ -38,7 +40,7 @@ class App extends React.Component {
         window.onorientationchange = () => this.updateButtonsPos();
         window.onresize = () => this.updateButtonsPos();
 
-        questionsFactoryService(false).then(value => {
+        questionsFactory(false).then(value => {
             this.setState({ questions: value }, () => {
                 this.updateButtonsPos();
             });
@@ -72,14 +74,16 @@ class App extends React.Component {
         this.updatePage(--currentState.currentQuestionIndex);
     };
 
-    onSubmitClick = e => {
-        console.log("submit");
+    onSubmitClick = async e => {
+        let submit = await submitFactory(null, this.state.questions, this.state.questionsAnswers)
+
+        console.log(submit);
     };
 
     onAnswerSelected = answerId => {
-        let clickedAnswerIndex = answerId
+        let clickedAnswerIndex = answerId;
         let currentState = this.state;
-        const currentAnswers = this.state.clientAnswerIndexes;
+        const currentAnswers = this.state.questionsAnswers;
         currentAnswers[currentState.currentQuestionIndex] = clickedAnswerIndex;
 
         this.setState({
@@ -115,14 +119,14 @@ class App extends React.Component {
     };
     questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
-    getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answer;
-    isAnswerSelected = answerIndex => this.state.clientAnswerIndexes[this.state.currentQuestionIndex] === answerIndex;
+    getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answers;
+    isAnswerSelected = answerIndex => this.state.questionsAnswers[this.state.currentQuestionIndex] === answerIndex;
     shouldShowSubmit = () =>
         this.state.currentQuestionIndex === this.state.questions.length - 1 &&
-        this.state.clientAnswerIndexes[this.state.questions.length - 1] !== undefined;
+        this.state.questionsAnswers[this.state.questions.length - 1] !== undefined;
     shouldShowNext = () =>
         this.state.currentQuestionIndex !== this.state.questions.length - 1 &&
-        this.state.clientAnswerIndexes[this.state.currentQuestionIndex] !== undefined;
+        this.state.questionsAnswers[this.state.currentQuestionIndex] !== undefined;
     shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
 
     areButtonsAnimating = () => {

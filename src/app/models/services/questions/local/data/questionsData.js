@@ -15,7 +15,7 @@ const questions = [
 
     Which, inserted at line 9, will compile?
         `,
-        answer: ["x2.do2();", "(Y)x2.do2();", "((Y)x2).do2();", "None of the above statements will compile."],
+        answers: ["x2.do2();", "(Y)x2.do2();", "((Y)x2).do2();", "None of the above statements will compile."],
         correctAnswerIndex: 2
     },
     {
@@ -36,7 +36,7 @@ const questions = [
     
     What is the result?
     `,
-        answer: ["fa fa", "fa la", "la la", "Compilation fails", "An exception is thrown at runtime"],
+        answers: ["fa fa", "fa la", "la la", "Compilation fails", "An exception is thrown at runtime"],
         correctAnswerIndex: 1
     },
     {
@@ -64,7 +64,7 @@ const questions = [
     
     What is the result?
     `,
-        answer: ["h hn x", "hn x h", "b h hn x", "bn x h hn x", "b bn x h hn x", "bn x b h hn x", "Compilation fails"],
+        answers: ["h hn x", "hn x h", "b h hn x", "bn x h hn x", "b bn x h hn x", "bn x b h hn x", "Compilation fails"],
         correctAnswerIndex: 2
     },
     {
@@ -89,7 +89,7 @@ const questions = [
         }
     }
     `,
-        answer: [
+        answers: [
             "furry bray",
             "stripes bray",
             "furry generic noise",
@@ -116,7 +116,7 @@ const questions = [
 
     Which, inserted independently at line 9, will compile?
     `,
-        answer: [
+        answers: [
             "return new ArrayList<Inn>();",
             "return new ArrayList<Hotel>();",
             "return new ArrayList<Object>();",
@@ -149,7 +149,7 @@ const questions = [
             } 
         }
     `,
-        answer: [
+        answers: [
             `If a is true and b is true then the output is "A && B"`,
             `If a is true and b is false then the output is "notB"`,
             `If a is false and b is true then the output is "ELSE" `,
@@ -169,7 +169,7 @@ const questions = [
     
     Which statement, if placed in a class other than MyOuter or MyInner, instantiates an instance of the nested class?
     `,
-        answer: [
+        answers: [
             `MyOuter m = new MyOuter();
 MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
             `MyOuter.MyInner m = new MyOuter.MyInner();`,
@@ -178,20 +178,20 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         ],
         correctAnswerIndex: 1
     },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answer: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    { question: "Primitive datatypes are allocated on stack.", answer: ["True", "False"], correctAnswerIndex: 0 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    { question: "Primitive datatypes are allocated on stack.", answers: ["True", "False"], correctAnswerIndex: 0 },
     {
         question: "Can we create an instance of Enum outside of Enum itself?",
-        answer: ["Yes", "No"],
+        answers: ["Yes", "No"],
         correctAnswerIndex: 1
     },
     {
         question: "What type of variable can be defined in an interface?",
-        answer: ["public static", "private final", "public final", "static final"],
+        answers: ["public static", "private final", "public final", "static final"],
         correctAnswerIndex: 0
     }
 ];
