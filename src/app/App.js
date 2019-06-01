@@ -10,7 +10,7 @@ import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
-import styles from "./styles/style";
+import styles from "./app-style";
 import questionsFactory from "./models/factories/get-questions-factory";
 import submitFactory from "./models/factories/submit-questions-factory";
 

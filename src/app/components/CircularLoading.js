@@ -1,6 +1,6 @@
 import React from "react";
-import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import theme from "../styles/theme";
 
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
         top: "60%",
         left: "50%",
         marginRight: "-50%",
-        transform: "translate(-50%, -50%)",
+        transform: "translate(-50%, -50%)"
     }
 }));
 

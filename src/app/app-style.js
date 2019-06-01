@@ -10,36 +10,35 @@ const styles = theme => ({
         marginRight: "-50%",
         transform: "translate(-50%, -50%)",
         width: "70%",
-        height: "75%",
+        height: "75%"
     },
     btnNext: {
         margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
-        right: 20,
+        right: 20
     },
     btnPrev: {
         margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
-        right: 100,
+        right: 100
     },
     btnPrevSubmit: {
         margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
-        right: 120,
+        right: 120
     },
     btnSubmit: {
         margin: theme.spacing(),
         marginTop: "20px",
         position: "absolute",
-        right: 20,
+        right: 20
     },
     logo: {
         marginTop: "2px"
     }
 });
-
 
 export default styles;

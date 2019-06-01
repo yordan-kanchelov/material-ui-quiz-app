@@ -10,7 +10,6 @@ const styles = theme => ({
     questionNumber: {
         marginTop: "20px",
         marginBottom: "10px"
-
     }
 });
 
