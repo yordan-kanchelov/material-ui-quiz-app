@@ -90,13 +90,16 @@ class App extends React.Component {
     };
 
     onTryAgainPressed = async () => {
-        console.log(this.state);
         this.setState({
-            questions: await getQuestions(),
+            questions: null,
             questionsAnswers: [],
             currentQuestionIndex: 0,
             result: null
         });
+
+        this.setState({
+            questions: await getQuestions()
+        })
     };
 
     onAnswerSelected = answerId => {

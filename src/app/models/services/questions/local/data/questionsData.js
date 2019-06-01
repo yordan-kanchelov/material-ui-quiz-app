@@ -167,7 +167,8 @@ const questions = [
         }
     }
     
-    Which statement, if placed in a class other than MyOuter or MyInner, instantiates an instance of the nested class?
+    Which statement, if placed in a class other than MyOuter or MyInner,
+    instantiates an instance of the nested class?
     `,
         answers: [
             `MyOuter m = new MyOuter();
@@ -178,11 +179,6 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         ],
         correctAnswerIndex: 1
     },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
     { question: "Primitive datatypes are allocated on stack.", answers: ["True", "False"], correctAnswerIndex: 0 },
     {
         question: "Can we create an instance of Enum outside of Enum itself?",
@@ -194,6 +190,18 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         answers: ["public static", "private final", "public final", "static final"],
         correctAnswerIndex: 0
     }
+
+    // { question: `Question 0`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 1`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
+    // { question: `Question 2`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
+    // { question: `Question 3`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 3 },
+    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 5`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
+    // { question: `Question 6`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
+    // { question: `Question 7`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 3 },
+    // { question: `Question 8`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
+    // { question: `Question 9`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
+    // { question: `Question 10`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
 ];
 
 export default questions;
