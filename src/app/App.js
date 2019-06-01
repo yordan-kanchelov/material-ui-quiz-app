@@ -76,8 +76,8 @@ class App extends React.Component {
         console.log("submit");
     };
 
-    onAnswerSelected = e => {
-        let clickedAnswerIndex = +e.target.id;
+    onAnswerSelected = answerId => {
+        let clickedAnswerIndex = answerId
         let currentState = this.state;
         const currentAnswers = this.state.clientAnswerIndexes;
         currentAnswers[currentState.currentQuestionIndex] = clickedAnswerIndex;

@@ -15,8 +15,20 @@ class Answer extends React.Component {
         return (
             <MuiThemeProvider theme={theme}>
                 <div className={classes.answer}>
-                    <Radio id={this.props.answerIndex.toString()} checked={this.props.isSelected} onClick={this.props.onAnswerSelect.bind(this)}/>
-                    <Typography className={classes.answerTypography} component="pre">
+                    <Radio
+                        id={this.props.answerIndex.toString()}
+                        checked={this.props.isSelected}
+                        onClick={() => {
+                            this.props.onAnswerSelect(this.props.answerIndex);
+                        }}
+                    />
+                    <Typography
+                        className={classes.answerTypography}
+                        component="pre"
+                        onClick={() => {
+                            this.props.onAnswerSelect(this.props.answerIndex);
+                        }}
+                    >
                         {this.props.answer}
                     </Typography>
                 </div>
