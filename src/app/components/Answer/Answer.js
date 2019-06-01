@@ -22,6 +22,7 @@ class Answer extends React.Component {
                 <div className={classes.answer}>
                     <Radio
                         id={this.props.answerIndex.toString()}
+                        color={"primary"}
                         checked={this.props.isSelected}
                         onClick={this.onAnswerClick}
                     />

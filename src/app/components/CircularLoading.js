@@ -23,7 +23,7 @@ function CircularLoading() {
     return (
         <MuiThemeProvider theme={theme}>
             <div className={classes.progressContainer}>
-                <CircularProgress color={"secondary"} size={200} className={classes.progress} />
+                <CircularProgress size={200} className={classes.progress} />
             </div>
         </MuiThemeProvider>
     );
