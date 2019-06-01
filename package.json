@@ -1,49 +1,66 @@
 {
-  "name": "quiz-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@material-ui/core": "^4.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
-    "react-transition-group": "^1.2.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "babel": {
-    "presets": [
-      "@babel/env",
-      "@babel/preset-react"
+    "name": "material-ui-quiz-app",
+    "version": "1.0.0",
+    "keywords": [
+        "material-ui",
+        "quiz",
+        "react"
     ],
-    "plugins": [
-      "@babel/plugin-proposal-class-properties"
-    ]
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jkanchelov/material-ui-quiz-app.git"
+    },
+    "author": "jkanchelov",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jkanchelov/material-ui-quiz-app/issues"
+    },
+    "homepage": "https://github.com/jkanchelov/material-ui-quiz-app#readme",
+    "bugs": {
+      "url": "https://github.com/jkanchelov/material-ui-quiz-app/issues"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@babel/core": "^7.4.5",
-    "@babel/plugin-proposal-class-properties": "^7.4.4",
-    "@babel/preset-env": "^7.4.5",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/register": "^7.4.4"
-  }
+    "dependencies": {
+        "@material-ui/core": "^4.0.0",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-scripts": "3.0.1",
+        "react-transition-group": "^1.2.1"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "babel": {
+        "presets": [
+            "@babel/env",
+            "@babel/preset-react"
+        ],
+        "plugins": [
+            "@babel/plugin-proposal-class-properties"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-class-properties": "^7.4.4",
+        "@babel/preset-env": "^7.4.5",
+        "@babel/preset-react": "^7.0.0",
+        "@babel/register": "^7.4.4"
+    }
 }
