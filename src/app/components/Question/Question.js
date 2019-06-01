@@ -1,10 +1,10 @@
 import React from "react";
 
+import addCssTransition from "../../utils/css-transition";
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import questionStyle from "./question-style";
 import theme from "../../styles/theme";
-import { CSSTransitionGroup } from "react-transition-group";
 
 class QuestionParagraph extends React.Component {
     render() {
@@ -12,17 +12,15 @@ class QuestionParagraph extends React.Component {
 
         return (
             <MuiThemeProvider theme={theme}>
-                <CSSTransitionGroup
-                    transitionName="mainApp"
-                    transitionAppear={true}
-                    transitionEnterTimeout={500}
-                    transitionAppearTimeout={500}
-                    transitionLeave={true}
-                    transitionLeaveTimeout={300}
-                >   
-                    <div className={classes.questionNumber}> {`Question ${this.props.questionIndex}/${this.props.questionsLength}:`} </div>
-                    <pre className={classes.questionParagraph}>{this.props.question}</pre>
-                </CSSTransitionGroup>
+                {addCssTransition(
+                    <div>
+                        <div className={classes.questionNumber}>
+                            {" "}
+                            {`Question ${this.props.questionIndex}/${this.props.questionsLength}:`}{" "}
+                        </div>
+                        <pre className={classes.questionParagraph}>{this.props.question}</pre>
+                    </div>
+                )}
             </MuiThemeProvider>
         );
     }

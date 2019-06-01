@@ -3,24 +3,27 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Answer from "./components/Answer/Answer";
+import Result from "./components/Result/Result";
 import QuestionParagraph from "./components/Question/Question.js";
+import addCssTransition from "./utils/css-transition";
 import { withStyles, MuiThemeProvider } from "@material-ui/core/styles";
 
 import logo from "../assets/logo.svg";
 import theme from "./styles/theme";
 import styles from "./styles/style";
 import questionsFactory from "./models/factories/get-questions-factory";
-import submitFactory from "./models/factories/submit-questions-factory"
+import submitFactory from "./models/factories/submit-questions-factory";
 
 import CircularLoading from "./components/CircularLoading";
 
-import { CSSTransitionGroup } from "react-transition-group";
+import getQuestions from "./models/services/questions/local/get-questions";
 
 class App extends React.Component {
     lastTimeButtonClicked = new Date().getTime();
 
     state = {
         questions: null,
+        result: null,
         questionsAnswers: [],
         currentQuestionIndex: 0
     };
@@ -31,9 +34,6 @@ class App extends React.Component {
         setTimeout(() => {
             this.updateButtonsPos();
         }, 0);
-
-        // setTimeout(() => {
-        // }, 500);
     }
 
     componentDidMount() {
@@ -74,10 +74,29 @@ class App extends React.Component {
         this.updatePage(--currentState.currentQuestionIndex);
     };
 
-    onSubmitClick = async e => {
-        let submit = await submitFactory(null, this.state.questions, this.state.questionsAnswers)
+    onSubmitClick = async () => {
+        const currentState = this.state;
 
-        console.log(submit);
+        this.setState({
+            questions: null,
+            questionsAnswers: [],
+            currentQuestionIndex: 0
+        });
+
+        let result = await submitFactory(null, currentState.questions, currentState.questionsAnswers);
+        this.setState({
+            result
+        });
+    };
+
+    onTryAgainPressed = async () => {
+        console.log(this.state);
+        this.setState({
+            questions: await getQuestions(),
+            questionsAnswers: [],
+            currentQuestionIndex: 0,
+            result: null
+        });
     };
 
     onAnswerSelected = answerId => {
@@ -117,6 +136,7 @@ class App extends React.Component {
             currentQuestionIndex: questionIndex
         });
     };
+
     questionsLoaded = () => (this.state.questions !== null ? true : false);
     getCurrentQuestion = () => this.state.questions[this.state.currentQuestionIndex].question;
     getCurrentAnswers = () => this.state.questions[this.state.currentQuestionIndex].answers;
@@ -127,8 +147,7 @@ class App extends React.Component {
     shouldShowNext = () =>
         this.state.currentQuestionIndex !== this.state.questions.length - 1 &&
         this.state.questionsAnswers[this.state.currentQuestionIndex] !== undefined;
-    shouldShowPrev = () => this.state.currentQuestionIndex !== 0;
-
+    shouldShowPrev = () => false; // this.state.currentQuestionIndex !== 0;
     areButtonsAnimating = () => {
         const transitionTime = 600;
         const currentTime = new Date().getTime();
@@ -136,33 +155,18 @@ class App extends React.Component {
         return currentTime - transitionTime <= this.lastTimeButtonClicked;
     };
 
-    addCssTransition = elem => {
-        return (
-            <CSSTransitionGroup
-                transitionName="mainApp"
-                transitionAppear={true}
-                transitionEnterTimeout={500}
-                transitionAppearTimeout={500}
-                transitionLeave={false}
-                transitionLeaveTimeout={500}
-            >
-                {elem}
-            </CSSTransitionGroup>
-        );
-    };
-
     render() {
         const { classes } = this.props;
 
         return (
             <MuiThemeProvider theme={theme}>
-                {this.addCssTransition(
+                {addCssTransition(
                     <Paper id="mainContainer" className={classes.paper} elevation={2}>
                         <img key={"logo"} src={logo} className={classes.logo} alt="logo" />
                         <hr key={"horizontalLine"} width={"100%"} />
-                        {this.questionsLoaded() ? (
+                        {this.questionsLoaded() && this.state.result == null ? (
                             <div>
-                                {this.addCssTransition(
+                                {addCssTransition(
                                     <div key={this.getCurrentQuestion()}>
                                         <QuestionParagraph
                                             question={this.getCurrentQuestion()}
@@ -184,7 +188,7 @@ class App extends React.Component {
 
                                         <div id="buttonsContainer">
                                             {this.shouldShowSubmit()
-                                                ? this.addCssTransition(
+                                                ? addCssTransition(
                                                       <Button
                                                           variant="contained"
                                                           className={classes.btnSubmit}
@@ -197,7 +201,7 @@ class App extends React.Component {
                                                 : null}
 
                                             {this.shouldShowNext()
-                                                ? this.addCssTransition(
+                                                ? addCssTransition(
                                                       <Button
                                                           variant="contained"
                                                           className={classes.btnNext}
@@ -210,7 +214,7 @@ class App extends React.Component {
                                                 : null}
 
                                             {this.shouldShowPrev()
-                                                ? this.addCssTransition(
+                                                ? addCssTransition(
                                                       <Button
                                                           variant="contained"
                                                           className={
@@ -229,6 +233,10 @@ class App extends React.Component {
                                     </div>
                                 )}
                             </div>
+                        ) : this.state.result !== null ? (
+                            addCssTransition(
+                                <Result result={this.state.result} tryAgainPressed={this.onTryAgainPressed} />
+                            )
                         ) : (
                             <CircularLoading key={"loadingCircle"} />
                         )}

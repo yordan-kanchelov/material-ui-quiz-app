@@ -19,13 +19,15 @@ export default (questions, questionAnswers) => {
 
             console.log(questions, questionAnswers,  questions.length * (requiredCorrectPercentage / 100))
 
-            let pass = correctAnswers >= questions.length * (requiredCorrectPercentage / 100);
-            let result = {
+            const questionsLength = questions.length
+            const pass = correctAnswers >= questionsLength * (requiredCorrectPercentage / 100);
+            const result = {
+                questionsLength,
                 correctAnswers,
                 pass
             };
 
             resolve(result);
-        }, 1500);
+        }, 0);
     });
 };
