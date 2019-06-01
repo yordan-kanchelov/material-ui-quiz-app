@@ -39,7 +39,7 @@ class Result extends React.Component {
                             variant="contained"
                             className={classes.resetButton}
                             onClick={this.props.tryAgainPressed}
-                            color="primary"
+                            color="secondary"
                         >
                             Try Again
                         </Button>
