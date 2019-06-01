@@ -7,7 +7,8 @@ const styles = theme => ({
         transform: "translate(-50%, -50%)",
         position: "absolute",
         top: "50%",
-        left: "50%"
+        left: "50%",
+        userSelect: "none"
     },
     resultSVG: {
         height: "100%",

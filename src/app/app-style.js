@@ -1,5 +1,6 @@
 const styles = theme => ({
     paper: {
+        userSelect: "none",
         overflowX: "hidden",
         ...theme.mixins.gutters(),
         paddingTop: theme.spacing(2),
@@ -37,6 +38,7 @@ const styles = theme => ({
         right: 20
     },
     logo: {
+        userSelect: "none",
         marginTop: "2px"
     }
 });
