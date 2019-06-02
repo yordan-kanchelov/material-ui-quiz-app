@@ -15,7 +15,6 @@ class QuestionParagraph extends React.Component {
                 {addCssTransition(
                     <div>
                         <div className={classes.questionNumber}>
-                            {" "}
                             {`Question ${this.props.questionIndex}/${this.props.questionsLength}:`}{" "}
                         </div>
                         <pre className={classes.questionParagraph}>{this.props.question}</pre>
