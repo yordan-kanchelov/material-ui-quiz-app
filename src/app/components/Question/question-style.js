@@ -4,7 +4,8 @@ const styles = theme => ({
         fontWeight: "bold",
         fontSize: "17px",
         marginBottom: "0px",
-        overflow: "auto",
+        overflowX: "auto",
+        overflowY: "hidden",
         marginTop: "0px"
     },
     questionNumber: {
