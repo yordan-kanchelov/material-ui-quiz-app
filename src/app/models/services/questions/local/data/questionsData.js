@@ -167,8 +167,8 @@ const questions = [
         }
     }
     
-    Which statement, if placed in a class other than MyOuter or MyInner,
-    instantiates an instance of the nested class?
+    Which statement, if placed in a class other than MyOuter
+    or MyInner, instantiates an instance of the nested class?
     `,
         answers: [
             `MyOuter m = new MyOuter();
