@@ -300,9 +300,9 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         }
         `,
         answers: [
-            `10\t10\t10`,
+            `10   10   10`,
             `Compilation Error`,
-            `10\t10`,
+            `10   10`,
             `Runtime Exception`
         ],
         correctAnswerIndex: 0
@@ -345,21 +345,21 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         question: `What is the output of the following?
 
             class ChangeIt {
-            \tstatic void doIt(int[] z) {
-            \t\tz = null;
-            \t}
+                static void doIt(int[] z) {
+                    z = null;
+                }
             }
 
             class TestId {
-            \tpublic static void main(String[] args) {
-            \t\tint[] myArray = {1,2,3,4,5};
-            \t\t
-            \t\tChangeIt.doIt(myArray);
-            \t\t
-            \t\tfor(int i = 0; i < myArray.length; i++) {
-            \t\t\tSystem.out.print(myArray[i] + "");
-            \t\t}
-            \t}`,
+                public static void main(String[] args) {
+                    int[] myArray = {1,2,3,4,5};
+            
+                    ChangeIt.doIt(myArray);
+            
+                    for(int i = 0; i < myArray.length; i++) {
+                        System.out.print(myArray[i] + "");
+                    }
+                }`,
         answers: [
             `1,2,3,4,5`,
             `Nothing will be printed.`,
@@ -426,12 +426,12 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
             import java.util.Map;
             
             public class MapTest {
-            \tpublic static void main(String[] args) {
-            \t\tMap m = new HashMap();
-            \t\tm.put(null, "Test");
-            \t\tm.put(null, "Fest");
-            \t\tSystem.out.println(m);
-            \t}
+                public static void main(String[] args) {
+                    Map m = new HashMap();
+                    m.put(null, "Test");
+                    m.put(null, "Fest");
+                    System.out.println(m);
+                }
             }`,
         answers: [
             `{null = Fest}`,
