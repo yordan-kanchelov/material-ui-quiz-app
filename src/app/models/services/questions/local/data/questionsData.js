@@ -448,7 +448,8 @@ MyOuter.MyInner mi = m.new MyOuter.MyInner();`,
         ],
         correctAnswerIndex: 1
     }, {
-        question: `If you were to store objects into an implementation of List which happens only once in the entire life cycle of the product, but reading these objects inside
+        question: `If you were to store objects into an implementation of List
+which happens only once in the entire life cycle of the product, but reading these objects inside
 the List implementation is quite high, then which one would you use?`,
         answers: [
             `Vector`,
@@ -466,7 +467,8 @@ the List implementation is quite high, then which one would you use?`,
         ],
         correctAnswerIndex: 2
     }, {
-        question: `Enumeration is an interface that helps to iterate over collection, but it can't remove any element the collection it is iterating?`,
+        question: `Enumeration is an interface that helps to iterate over collection,
+but it can't remove any element the collection it is iterating?`,
         answers: [
             `True`,
             `False`
@@ -482,19 +484,6 @@ the List implementation is quite high, then which one would you use?`,
         ],
         correctAnswerIndex: 1
     }
-
-
-    // { question: `Question 0`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 1`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
-    // { question: `Question 2`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
-    // { question: `Question 3`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 3 },
-    // { question: `Question 4`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 5`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
-    // { question: `Question 6`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
-    // { question: `Question 7`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 3 },
-    // { question: `Question 8`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 0 },
-    // { question: `Question 9`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 1 },
-    // { question: `Question 10`, answers: [`Ipsim`, `lotus`, `Idk`, `Wrong`], correctAnswerIndex: 2 },
 ];
 
 export default questions;
